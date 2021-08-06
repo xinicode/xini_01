@@ -10,7 +10,6 @@ Vue.use(ViewUI);
 
 Vue.mixin(xiniMixinAll)
 // Mock.bootstrap();
-console.log(process)
 Vue.config.productionTip = false
 
 const router = new VueRouter({
@@ -27,8 +26,8 @@ router.beforeEach((to, from, next) => {
   if (to.path == '/login') {
       sessionStorage.removeItem('user');
   }
-  let t:any = sessionStorage.getItem('user');
-  let user:any = JSON.parse(t);
+  const t:any = sessionStorage.getItem('user');
+  const user:any = JSON.parse(t);
   if (!user && to.path != '/login') {
       next({ path: '/login' })
   } else {
