@@ -1,19 +1,50 @@
 
 <template>
-  <div class="layout" >
+  <div class="layout">
     <Row type="flex">
-        <X-MenuLeft />
-            123123
+      <X-MenuLeft :toChildMsg="cardNumber" @input="check" :title="title" />
+      {{ title }}
+
+      <button @click="onChange">a</button>
+
+      <X-MenuLeft2 :toChildMsg="cardNumber" />
     </Row>
   </div>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-
-@Component({
-})
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { EventBus } from "@/components/bus";
+@Component({})
 export default class Home extends Vue {
-  @Prop() private msg!: string;
+  tt() {
+    this.title = "22";
+  }
+
+  onChange() {
+    console.log("home_change");
+    EventBus.$emit("aMsg", "Home Msg");
+  }
+
+  
+
+
+  title = "11";
+
+  check(val: string) {
+    console.log(val);
+    console.log(this.title);
+  }
+
+  cardNumber: any = {
+    key: "cardNumVal",
+    title: "卡号",
+    errorMsg: "请输入正确的卡号",
+    placeholderMsg: "该交易支持储蓄卡/信用卡",
+    cameraIsShow: true,
+    ipnutMaxLength: 25,
+    regular: /^([1-9]{1})[\d\s]{18,24}$/,
+    queryCardNumber: "",
+  };
 }
 </script>
 <style scoped>

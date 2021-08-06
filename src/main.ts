@@ -18,7 +18,7 @@ const router = new VueRouter({
   routes
 })
 
-
+Vue.prototype.$EventBus = new Vue();
 
 
 //登录
