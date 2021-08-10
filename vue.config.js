@@ -37,7 +37,7 @@ module.exports = {
     // css预设器配置项
     loaderOptions: {},    
     // 是否启用 CSS modules for all css / pre-processor files.
-    requireModuleExtension: false
+    modules: false
   },  
   // 是否使用 thread-loader
   parallel: require('os').cpus().length > 1, 
@@ -50,7 +50,7 @@ module.exports = {
     port: 3300,
     https: false,
     hotOnly: false,   
-    // http 代理配置
+    // http 代理配置  
     proxy: {      
       '/api': {
         target: 'http://127.0.0.1:3000/api',

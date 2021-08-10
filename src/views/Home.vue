@@ -2,66 +2,130 @@
 <template>
   <div class="layout">
     <Row type="flex">
-      <X-MenuLeft :toChildMsg="cardNumber" @input="check" :title="title" />
-      {{ title }}
-
-      <button @click="onChange">a</button>
-
-      <X-MenuLeft2 :toChildMsg="cardNumber" />
+      <Col :span="spanLeft" class="layout-menu-left">
+        <Menu
+          :mode="modeType"
+          theme="dark"
+          width="auto"
+          :active-name="this.$route.path"
+          :open-names="openNames"
+          @on-select="menuSelect"
+          accordion
+        >
+          <div class="layout-logo-left">
+            <span class="layout-text" v-if="spanLeft >= 5">CMP管理系统</span>
+          </div>
+          <template
+            v-for="(item, index) in $router.options.routes"
+            v-if="spanLeft >= 5 && !item.hidden"
+          >
+            <Submenu :name="item.name" v-if="!item.leaf">
+              <template slot="title">
+                <Icon
+                  :type="item.iconCls"
+                  :size="spanLeft === 5 ? 14 : 24"
+                ></Icon>
+                <span class="layout-text">{{ item.name }}</span>
+              </template>
+              <template
+                v-for="(child, childIndex) in item.children"
+                v-if="!child.hidden"
+              >
+                <Menu-item :name="child.path">{{ child.name }}</Menu-item>
+              </template>
+            </Submenu>
+            <template v-if="item.leaf && item.children.length > 0">
+              <Menu-item :name="item.children[0].path">
+                <Icon
+                  :type="item.iconCls"
+                  :size="spanLeft === 5 ? 14 : 24"
+                ></Icon>
+                <span class="layout-text">{{ item.children[0].name }}</span>
+              </Menu-item>
+            </template>
+          </template>
+          <template
+            v-for="(item, index) in $router.options.routes"
+            v-if="spanLeft < 5 && !item.hidden"
+          >
+            <Dropdown
+              placement="right-start"
+              class="_dropdownList"
+              @on-click="dropDown"
+            >
+              <Icon
+                :type="item.iconCls"
+                color="#fff"
+                :size="spanLeft === 5 ? 14 : 24"
+              ></Icon>
+              <DropdownMenu slot="list">
+                <DropdownItem v-if="!item.name" :name="item.children[0].path">{{
+                  item.children[0].name
+                }}</DropdownItem>
+                <Dropdown
+                  placement="right-start"
+                  v-if="item.children && item.name"
+                >
+                  <DropdownItem>
+                    {{ item.name }}
+                    <Icon type="ios-arrow-right"></Icon>
+                  </DropdownItem>
+                  <DropdownMenu slot="list">
+                    <DropdownItem
+                      v-for="(child, childIndex) in item.children"
+                      :key="childIndex"
+                      :name="child.path"
+                      >{{ child.name }}</DropdownItem
+                    >
+                  </DropdownMenu>
+                </Dropdown>
+              </DropdownMenu>
+            </Dropdown>
+          </template>
+        </Menu>
+      </Col>
+      <Col :span="spanRight">
+        <div class="layout-header">
+          <Button type="text" @click="toggleClick">
+            <Icon type="md-apps" size="32"></Icon>
+          </Button>
+          <div class="userinfo">
+            <Dropdown placement="bottom-end">
+              <span class="head-img">
+                {{ curUserName }}
+                <img src="../assets/user.jpg" />
+              </span>
+              <Dropdown-menu slot="list">
+                <Dropdown-item @click.native="modifyPassWord()"
+                  >修改密码</Dropdown-item
+                >
+                <Dropdown-item @click.native="logout()" divided
+                  >退出</Dropdown-item
+                >
+              </Dropdown-menu>
+            </Dropdown>
+          </div>
+        </div>
+        <div class="layout-breadcrumb">
+          <Breadcrumb>
+            <Breadcrumb-item href="#">应用中心</Breadcrumb-item>
+            <Breadcrumb-item>{{ $route.name }}</Breadcrumb-item>
+          </Breadcrumb>
+        </div>
+        <div class="layout-content">
+          <div class="layout-content-main">
+            <router-view /> 
+          </div>
+        </div>
+      </Col>
     </Row>
   </div>
 </template>
-<script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { EventBus } from "@/components/bus";
-@Component({})
-export default class Home extends Vue {
-  tt() {
-    this.title = "22";
-  }
-
-  onChange() {
-    console.log("home_change");
-    EventBus.$emit("aMsg", "Home Msg");
-  }
-
-  
-
-
-  title = "11";
-
-  check(val: string) {
-    console.log(val);
-    console.log(this.title);
-  }
-
-  cardNumber: any = {
-    key: "cardNumVal",
-    title: "卡号",
-    errorMsg: "请输入正确的卡号",
-    placeholderMsg: "该交易支持储蓄卡/信用卡",
-    cameraIsShow: true,
-    ipnutMaxLength: 25,
-    regular: /^([1-9]{1})[\d\s]{18,24}$/,
-    queryCardNumber: "",
-  };
-}
-</script>
+<script lang="ts" src="./Home.ts" />
 <style scoped>
 .ivu-select-dropdown .ivu-dropdown {
   margin: 0px 12px 0px 0px;
 }
-._dropdownList {
-  /*  width: 100%;
-    text-align: center; */
-}
-._iconCls {
-  width: 56px;
-  text-align: center;
-}
-</style>
-
-<style scoped>
 .layout {
   background: #f5f7f9;
   position: relative;
@@ -88,7 +152,7 @@ export default class Home extends Vue {
   color: #9ea7b4;
 }
 .layout-menu-left {
-  background: #464c5b;
+  background: #515a6e;
 }
 .layout-header {
   height: 60px;
@@ -100,12 +164,12 @@ export default class Home extends Vue {
   line-height: 60px;
   font-size: 28px;
   text-align: center;
-  /*  background: #5b6270;
-        border-radius: 3px;
-        margin: 15px auto;*/
 }
 .layout-ceiling-main a {
   color: #9ba7b5;
+}
+.layout-text {
+  color: #fff;
 }
 .layout-hide-text .layout-text {
   display: none;
