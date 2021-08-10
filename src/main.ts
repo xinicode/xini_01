@@ -5,12 +5,16 @@ import store from './store'
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 import VueRouter from 'vue-router';
-import xiniMixinAll from './mixins/index'
+import xiniMixinAll from './mixins/index';
+import { bts } from './bootstrap';
+
+
+
 Vue.use(ViewUI);
 
 Vue.mixin(xiniMixinAll)
 // Mock.bootstrap();
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 const router = new VueRouter({
   mode: 'history',
@@ -19,19 +23,19 @@ const router = new VueRouter({
 })
 
 Vue.prototype.$EventBus = new Vue();
-
+Vue.prototype.$cuihao = bts;
 
 //登录
 router.beforeEach((to, from, next) => {
   if (to.path == '/login') {
-      sessionStorage.removeItem('user');
+    sessionStorage.removeItem('user');
   }
-  const t:any = sessionStorage.getItem('user');
-  const user:any = JSON.parse(t);
+  const t: any = sessionStorage.getItem('user');
+  const user: any = JSON.parse(t);
   if (!user && to.path != '/login') {
-      next({ path: '/login' })
+    next({ path: '/login' })
   } else {
-      next()
+    next()
   }
 })
 
