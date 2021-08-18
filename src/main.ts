@@ -17,7 +17,7 @@ Vue.mixin(xiniMixinAll)
 Vue.config.productionTip = false;
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

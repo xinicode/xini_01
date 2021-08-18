@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 500px; margin: 300px auto">
+  <div class="content">
     <Form ref="form" :model="model" :rules="ruleInline">
       <FormItem prop="username">
         <Input type="text" v-model="model.username" placeholder="Username">
@@ -11,7 +11,6 @@
           <Icon type="ios-lock-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
-
       <FormItem>
         <Checkbox-group v-model="model.remember">
           <Checkbox label="true" name="remember">记住密码</Checkbox>
@@ -19,15 +18,20 @@
       </FormItem>
 
       <FormItem>
-        <Button type="primary" @click="handleSubmit()">登录</Button>
+        <Button type="primary" @click="submit()">登录</Button>
         <Button type="primary" @click="formLoginReset()">重置</Button>
       </FormItem>
     </Form>
   </div>
 </template>
-
+<style scoped>
+.content {
+  width: 300px;
+  margin: 100px auto;
+}
+</style>
 <script lang="ts">
-import { Component, Vue, Ref } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class Login extends Vue {
@@ -50,12 +54,10 @@ export default class Login extends Vue {
     password: "",
   };
 
-  async handleSubmit() {
+  submit() {
     sessionStorage.setItem("user", JSON.stringify(this.model.username));
     this.$Message.success("提交成功");
     this.$router.push({ path: "/Main" });
   }
-
-  formLoginReset() {}
 }
 </script>

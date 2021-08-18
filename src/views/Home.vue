@@ -13,7 +13,7 @@
           accordion
         >
           <div class="layout-logo-left">
-            <span class="layout-text" v-if="spanLeft >= 5">CMP管理系统</span>
+            <!-- <span class="layout-text" v-if="spanLeft >= 5">CMP管理系统</span> -->
           </div>
           <template
             v-for="(item, index) in $router.options.routes"

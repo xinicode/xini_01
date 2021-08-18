@@ -8,7 +8,7 @@ import Main from '../views/Main.vue'
 
 Vue.use(VueRouter)
 
-const routes: Array<RouteConfig> = [
+const routes: Array<any> = [
   {
     path: '/',
     name: '导航一',

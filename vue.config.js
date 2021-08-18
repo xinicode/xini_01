@@ -18,6 +18,8 @@ module.exports = {
     config.resolve.alias
       .set('vue$', 'vue/dist/vue.esm.js')
       .set('@', path.resolve(__dirname, './src'))
+      .set('@utils', path.resolve(__dirname, './src/util'))
+      .set('@components', path.resolve(__dirname, './src/components'))
   },
   configureWebpack: (config) => {    
   if (process.env.NODE_ENV === 'production') {      

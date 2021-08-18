@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import _ from 'lodash';
-import { CTooler } from '../tools';
+import { CTooler } from '@/util/tools';
 
 
 function _getThemeByRoute(route) {
