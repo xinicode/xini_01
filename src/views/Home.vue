@@ -106,17 +106,13 @@
             </Dropdown>
           </div>
         </div>
-        <div class="layout-breadcrumb">
+        <!-- <div class="layout-breadcrumb">
           <Breadcrumb>
             <Breadcrumb-item href="#">应用中心</Breadcrumb-item>
             <Breadcrumb-item>{{ $route.name }}</Breadcrumb-item>
           </Breadcrumb>
-        </div>
-        <div class="layout-content">
-          <div class="layout-content-main">
-            <router-view /> 
-          </div>
-        </div>
+        </div> -->
+        <router-view /> 
       </Col>
     </Row>
   </div>

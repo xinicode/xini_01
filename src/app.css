@@ -1,0 +1,42 @@
+.bin-page .bin-header {
+  background-color: #fff;
+  padding: 16px;
+  position: relative;
+  border-bottom: 1px solid #e8eaec;
+}
+.bin-page .bin-header>.title {
+  font-size: 26px;
+  line-height: 1;
+  color: #17233d;
+  font-weight: 400;
+}
+.bin-page .bin-header>.title {
+  width: 95%;
+}
+.bin-page .bin-header>.subtitle {
+  margin-right: 100px;
+}
+.bin-page .bin-header>.subtitle {
+  font-size: 13px;
+  color: #808695;
+  line-height: 21px;
+  margin-top: 4px;
+}
+.bin-page .bin-header .back-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  font-size: 22px;
+  margin-top: -17px;
+  z-index: 5;
+}
+.ivu-btn-circle-outline.ivu-btn-icon-only, .ivu-btn-circle.ivu-btn-icon-only {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 16px;
+  border-radius: 50%;
+}
+.bin-page-tabs {
+  margin: 0;
+}

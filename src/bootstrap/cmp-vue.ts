@@ -7,6 +7,13 @@ function _getThemeByRoute(route) {
   return CTooler.safeOperator(function () { return route.matched[0].meta.cmpTheme; }, '');
 }
 
+declare module 'vue/types/vue' {
+  interface Vue {
+    $open(location, query?, option?);
+  }
+}
+
+
 
 _.assign(Vue.prototype, {
   $open(location, query, option) {
@@ -14,28 +21,29 @@ _.assign(Vue.prototype, {
     // if(!option.theme){
     //   option.theme = _getThemeByRoute(this.$route);
     // }
-    return CVue.$open(location, query, option)
+    return CmpVue.$open(location, query, option)
   }
 })
 
 
-declare module 'vue/types/vue' {
-  interface Vue {    
-    $open(location, query?, option?);
-  }
+export function CmpCreateLink(opener?: any, page?: any, openBy?: any) {
+
+
+
 }
 
 
-
-export class CVue extends Vue {
+export class CmpVue extends Vue {
   static home: any;
 
-  static $open(location, query?, option?) {
-    console.log(location)
-    let fullPath = '';
-    let id = 1;
-    let timeOut = '';
+  static openMode: 'child' | 'openBy' | 'main' = 'main';
 
-    return {};
+  static $open(location, query?, option?) {
+    console.log(query)
+    // this.$router.push(location)
+
   }
+
+
+
 }

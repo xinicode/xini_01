@@ -10,7 +10,7 @@ import { CTStorage } from '../config/storage'
  * @param url 
  * @returns 
  */
- function _queryString(url: string): string[] {
+function _queryString(url: string): string[] {
   let [newUrl, ...hash] = url ? url.split('#') : ['', ''];
   return [hash.join('#'), ...newUrl.split('?')];
 }
@@ -60,7 +60,7 @@ export class CTooler {
     if (!p) return url;
     let [hash, href, queryStr] = _queryString(url || '');
     let query = this.queryParse(queryStr);
-    CTooler.eachProp(p, function (item, name) {
+    _.forEach(p, function (item, name) {
       item || (item = '');
       query[name] = json === true && (_.isArray(item) || _.isObject(item)) ? JSON.stringify(item) : item
     });
@@ -71,15 +71,17 @@ export class CTooler {
   }
 
 
-  static eachProp(obj: any, callback: (item: any, name: string) => void, thisArg: any = null) {
-    if (!obj) return;
-    var item;
-    for (var n in obj) {
-      if (CTooler.hasOwnProp(obj, n)) {
-        item = obj[n];
-        if (callback.call(thisArg, item, n) === false) break;
-      }
-    }
+  static queryString(item) {
+    let str: any = CTooler.getQueryString((window.location + ""), item);
+    return _.isEmpty(str) ? str : decodeURIComponent(str);
+  }
+
+  static getQueryString(url, name?: string) {
+    if (!url) return '';
+    let [hash, href, queryStr] = _queryString(url);
+    if (!name) return queryStr || '';
+    let query: object = CTooler.queryParse(queryStr);
+    return query[name] || '';
   }
 
   /**
@@ -158,10 +160,56 @@ export class CTooler {
   }
 
 
+  static encodeUnicode(str) {
+    var res = [];
+    for (var i = 0; i < str.length; i++) {
+      res[i] = ("00" + str.charCodeAt(i).toString(16)).slice(-4);
+    }
+    return "\\u" + res.join("\\u");
+  }
 
 
+  static decodeUnicode(str) {
+    str = str.replace(/\\/g, "%");
+    return unescape(str);
+  }
 
 
+  static _getDateString(timeStr) {
+    return _.isNull(timeStr) ? timeStr : timeStr.indexOf('T') ? timeStr.split(' ')[0] : timeStr.split('T')[0];
+  }
+
+
+  static getDateDiff(timeStr) {
+    if (!timeStr) return '';
+    var _dateTimeReg = /(\d+)\-(\d+)\-(\d+)\s*(?:(\d+)\:(\d+)(?:\:(\d+))*)*/;
+    var now = new Date().getTime(),
+      dateRegs = _dateTimeReg.exec(timeStr),
+      hisTimeDate = dateRegs ? new Date(~~dateRegs[1], ~~dateRegs[2] - 1, ~~dateRegs[3], ~~dateRegs[4], ~~dateRegs[5], ~~dateRegs[6]).getTime() : now,
+      diffValue = now - hisTimeDate,
+      arg = arguments,
+      result = '',
+      minute = 1000 * 60,
+      hour = minute * 60,
+      day = hour * 24,
+      halfamonth = day * 15,
+      month = day * 30,
+      year = month * 12,
+
+      _year = diffValue / year,
+      _month = diffValue / month,
+      _week = diffValue / (7 * day),
+      _day = diffValue / day,
+      _hour: any = diffValue / hour,
+      _min: any = diffValue / minute;
+    if (_year >= 1 || _month >= 1 || _week >= 1 || _day >= 1) {
+      result = CTooler._getDateString(timeStr)
+    }
+    else if (_hour >= 1) result = parseInt(_hour) + "小时前";
+    else if (_min >= 1) result = parseInt(_min) + "分钟前";
+    else result = "刚刚";
+    return result;
+  }
 
 
 

@@ -8,9 +8,10 @@ import VueRouter from 'vue-router';
 import xiniMixinAll from './mixins/index';
 import { bts } from './bootstrap';
 
-
+import "./app.css";
 
 Vue.use(ViewUI);
+
 
 Vue.mixin(xiniMixinAll)
 // Mock.bootstrap();

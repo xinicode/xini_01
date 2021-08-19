@@ -67,12 +67,12 @@ export class CTCookie {
 }
 
 
-console.log('cookie', document.cookie);
-console.log('test', CTCookie.get('test'));
-CTCookie.set('test', '1111');
-CTCookie.set('test1', '1111');
-console.log('cookie', document.cookie);
-console.log('test', CTCookie.get('test'));
-CTCookie.remove('test');
-console.log('cookie', document.cookie);
-console.log('test', CTCookie.get('test'));
+// console.log('cookie', document.cookie);
+// console.log('test', CTCookie.get('test'));
+// CTCookie.set('test', '1111');
+// CTCookie.set('test1', '1111');
+// console.log('cookie', document.cookie);
+// console.log('test', CTCookie.get('test'));
+// CTCookie.remove('test');
+// console.log('cookie', document.cookie);
+// console.log('test', CTCookie.get('test'));

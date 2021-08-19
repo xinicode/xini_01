@@ -1,33 +1,35 @@
 <template>
-  <div style="width: 500px; margin: 300px auto">
-    <div>12312a</div>
-    <Button id="btn" @click="destory">测试按钮</Button>
-    <Button id="btn" @click="testBtn">测试按钮</Button>
-    <Button id="btn" @click="link">测试按钮</Button>
-  </div>
+  <cmp-page>
+    
+    <cmp-page-header> 123123 </cmp-page-header>
+
+    <cmp-body>
+      <div style="width: 500px; margin: 300px auto">
+        <div>12312a</div>
+        <Button id="btn" @click="testBtn">测试按钮</Button>
+        <Button id="btn" @click="link">测试按钮</Button>
+      </div>
+    </cmp-body>
+
+  </cmp-page>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { CVue } from "../bootstrap/Cvue";
+import { CmpVue } from "../bootstrap/cmp-vue";
 import _ from "lodash";
 import { CTooler } from "@/util/tools";
-import dayjs from 'dayjs';
+
+import CmpPage from "@/vue-extends/cmp-page";
+import dayjs from "dayjs";
 
 @Component
-export default class Main extends CVue {
-  destory() {
-     let url = '10.201.16.55?t=5';
-     let query = {
-       a:123, deply:3
-     }
-     url = CTooler.setQueryString(url,query);
-     console.log(url)
-  
+export default class Main extends CmpPage {
+  go(url, params) {}
 
-  }
+  created() {}
   testBtn() {
-    this.$Message.info("This is a info tip");
+    this.$open("./about", { a: 123 });
   }
 
   link() {
