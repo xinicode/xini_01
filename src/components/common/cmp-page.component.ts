@@ -18,9 +18,7 @@ export default class CmpPageComponent extends Vue {
 
     created(){
         let parent: any = this.$parent;
-        console.log(parent);
         this.loading = false;
-        console.log('$isLoadingInit' in parent )
         // this.loading = '$isLoadingInit' in parent ? parent.$isLoadingInit : true;
     }
 

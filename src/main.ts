@@ -13,6 +13,7 @@ import "./app.css";
 Vue.use(ViewUI);
 
 
+
 Vue.mixin(xiniMixinAll)
 // Mock.bootstrap();
 Vue.config.productionTip = false;
@@ -29,10 +30,9 @@ Vue.prototype.$cuihao = bts;
 //登录
 router.beforeEach((to, from, next) => {
   if (to.path == '/login') {
-    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('userName');
   }
-  const t: any = sessionStorage.getItem('user');
-  const user: any = JSON.parse(t);
+  const user: any = sessionStorage.getItem('userName');
   if (!user && to.path != '/login') {
     next({ path: '/login' })
   } else {
@@ -41,8 +41,10 @@ router.beforeEach((to, from, next) => {
 })
 
 
-new Vue({
+let vue = new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
+
+export default vue;

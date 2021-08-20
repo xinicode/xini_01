@@ -32,6 +32,7 @@
 </style>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { postRequest } from "@/request/api";
 
 @Component
 export default class Login extends Vue {
@@ -55,9 +56,16 @@ export default class Login extends Vue {
   };
 
   submit() {
-    sessionStorage.setItem("user", JSON.stringify(this.model.username));
-    this.$Message.success("提交成功");
-    this.$router.push({ path: "/Main" });
+    let data = {
+      userName: this.model.username,
+      passWord: this.model.password,
+    };
+    this.$rest("/sys/login").then((res:any) => {
+      if (!res) return;
+      sessionStorage.setItem("userName", this.model.username);
+      sessionStorage.setItem("token", res.token || '' );
+      this.$router.push({ path: "/main" });
+    });
   }
 }
 </script>

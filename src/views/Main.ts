@@ -1,13 +1,30 @@
 
 import CmpPage from "@/vue-extends/cmp-page";
 import { Component } from "vue-property-decorator";
+import { postRequest } from "../request/api";
 
 
 @Component
 export default class Main extends CmpPage {
+
+
+
+  getList(){
+    this.$rest('/sys/getClassmates').then((rs)=>{
+      console.log(rs)
+      // if(rs.code == '200') return;
+      // let datas = rs.data;
+
+    })
+  }
+
+
+q
   go(url, params) { }
 
-  created() { }
+  created() {
+    this.getList()
+   }
   testBtn() {
     this.$open("./about", { a: 123 });
   }

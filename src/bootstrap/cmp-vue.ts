@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import _ from 'lodash';
 import { CTooler } from '@/util/tools';
+import service from '../request/service';
 
 
 function _getThemeByRoute(route) {
@@ -10,6 +11,7 @@ function _getThemeByRoute(route) {
 declare module 'vue/types/vue' {
   interface Vue {
     $open(location, query?, option?);
+    $rest(url, query?);
   }
 }
 
@@ -22,6 +24,9 @@ _.assign(Vue.prototype, {
     //   option.theme = _getThemeByRoute(this.$route);
     // }
     return CmpVue.$open(location, query, option)
+  },
+  $rest(url,query){
+    return CmpVue.$rest(url,query);
   }
 })
 
@@ -44,6 +49,9 @@ export class CmpVue extends Vue {
 
   }
 
+  static $rest(url, query?): Promise<any> {
+    return service.post(url, query)
+  }
 
 
 }
