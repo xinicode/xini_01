@@ -40,3 +40,11 @@
 .bin-page-tabs {
   margin: 0;
 }
+
+.bin-page .bin-body {
+  padding: 16px;
+}
+
+.bin-page .bin-page .bin-body {
+  padding: 0;
+}

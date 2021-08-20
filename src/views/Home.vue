@@ -84,7 +84,7 @@
           </template>
         </Menu>
       </Col>
-      <Col :span="spanRight">
+      <Col :span="spanRight" class="layout-content">
         <div class="layout-header">
           <Button type="text" @click="toggleClick">
             <Icon type="md-apps" size="32"></Icon>
@@ -112,40 +112,41 @@
             <Breadcrumb-item>{{ $route.name }}</Breadcrumb-item>
           </Breadcrumb>
         </div> -->
-        <router-view /> 
+        <div class="layout-content-main">
+          <router-view />
+        </div>
+        <footer class="ivu-global-footer i-copyright">
+          <div class="ivu-global-footer-copyright">Copyright © 2021</div>
+        </footer>
       </Col>
     </Row>
   </div>
 </template>
 <script lang="ts" src="./Home.ts" />
 <style scoped>
-.ivu-select-dropdown .ivu-dropdown {
-  margin: 0px 12px 0px 0px;
-}
 .layout {
   background: #f5f7f9;
   position: relative;
   overflow: hidden;
   height: 100%;
 }
-.layout-breadcrumb {
-  padding: 10px 15px 0;
-}
 .layout-content {
-  min-height: 200px;
-  margin: 15px;
-  overflow: auto;
-  background: #fff;
-  border-radius: 4px;
-  height: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-flex: 1;
+  -ms-flex: auto;
+  flex: auto;
+  background: #f5f7f9;
 }
 .layout-content-main {
-  padding: 10px;
-}
-.layout-copy {
-  text-align: center;
-  padding: 10px 0 20px;
-  color: #9ea7b4;
+  -webkit-box-flex: 1;
+  -ms-flex: auto;
+  flex: auto;
 }
 .layout-menu-left {
   background: #515a6e;
@@ -172,12 +173,11 @@
 }
 .ivu-col {
   transition: width 0.2s ease-in-out;
-}
+} 
 .ivu-row-flex {
   height: 100%;
 }
 .userinfo {
-  display: inline-block;
   float: right;
 }
 .userinfo .ivu-dropdown {
@@ -205,4 +205,14 @@
   height: 40px;
   float: right;
 }
+.ivu-global-footer {
+  margin: 48px 0 24px 0;
+  padding: 0 16px;
+  text-align: center;
+}
+.ivu-global-footer-copyright {
+  color: #808695;
+  font-size: 14px;
+}
+
 </style>
