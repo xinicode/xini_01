@@ -5,7 +5,7 @@ import Vue from '@/main';
 
 const getTokenByLocal = () => {
   const token = sessionStorage.getItem('token');
-  return token
+  return token;
 };
 
 
@@ -38,7 +38,7 @@ service.interceptors.response.use(
     }
     if (res.code == '401') {
       Vue.$Message.warning('未登录');
-      Vue.$router.push({ path: '/login' });
+      // Vue.$router.push({ path: '/login' });
     }
     if (res.code == '500') {
       Vue.$Message.warning(res.msg);

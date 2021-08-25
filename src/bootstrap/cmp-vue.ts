@@ -26,7 +26,7 @@ _.assign(Vue.prototype, {
     return CmpVue.$open(location, query, option)
   },
   $rest(url,query){
-    return CmpVue.$rest(url,query);
+    return CmpVue.$restPost(url,query);
   }
 })
 
@@ -49,9 +49,17 @@ export class CmpVue extends Vue {
 
   }
 
-  static $rest(url, query?): Promise<any> {
+  static $restPost(url, query?): Promise<any> {
     return service.post(url, query)
   }
+
+  static $restGet(url, query?): Promise<any> {
+    return service.get(url, query)
+  }
+
+  
+
+
 
 
 }

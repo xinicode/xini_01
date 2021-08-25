@@ -9,8 +9,8 @@ export default class Main extends CmpPage {
 
 
 
-  getList(){
-    this.$rest('/sys/getClassmates').then((rs)=>{
+  getList() {
+    this.$rest('/sys/getClassmates').then((rs) => {
       console.log(rs)
       // if(rs.code == '200') return;
       // let datas = rs.data;
@@ -19,18 +19,17 @@ export default class Main extends CmpPage {
   }
 
 
-q
   go(url, params) { }
 
   created() {
     this.getList()
-   }
+  }
   testBtn() {
-    this.$open("./about", { a: 123 });
+    this.$router.push({ name: "/about", params: { userId: true } });
   }
 
   link() {
-    this.$router.push({ path: "./about" });
+    this.$router.push({ path: "./about", query: { userId: true } });
   }
 
   func() {

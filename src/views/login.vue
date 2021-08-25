@@ -60,12 +60,18 @@ export default class Login extends Vue {
       userName: this.model.username,
       passWord: this.model.password,
     };
-    this.$rest("/sys/login").then((res:any) => {
-      if (!res) return;
-      sessionStorage.setItem("userName", this.model.username);
-      sessionStorage.setItem("token", res.token || '' );
-      this.$router.push({ path: "/main" });
-    });
+
+     sessionStorage.setItem("userName", this.model.username);
+     sessionStorage.setItem("token",  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Mjk0Mzg5NTksImV4cCI6MTYyOTUyNTM1OX0.qfJdZaSHGcUh05wz1WbleSSeOhfK7PYVzlsaYlhpD_U' );
+     this.$router.push({ path: "/main" });
+
+
+    // this.$rest("/sys/login").then((res:any) => {
+    //   if (!res) return;
+    //   sessionStorage.setItem("userName", this.model.username);
+    //   sessionStorage.setItem("token", res.token || '' );
+    //   this.$router.push({ path: "/main" });
+    // });
   }
 }
 </script>

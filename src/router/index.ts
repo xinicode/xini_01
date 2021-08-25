@@ -27,20 +27,20 @@ const routes: Array<any> = [
     component: Home,
     children: [
       {
-        path: '/about', component: About, name: '关于'
+        path: '/about', component: About, name: 'about'
       }
     ]
   },
   {
     path: '/login',
     component: Login,
-    name: '',
+    name: 'login',
     hidden: true
   },
   {
     path: '/404',
     component: NotFound,
-    name: '',
+    name: '404',
     hidden: true
   },
   {
